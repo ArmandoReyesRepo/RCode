@@ -1,0 +1,12 @@
+
+fortified_barley <- barley %>% 
+  # Fortify with metric units
+  fortify_with_metric_units2() %>%
+  # Fortify with census regions
+  fortify_with_census_region2()
+
+fortified_barley %>% 
+  # Run a GAM of yield vs. year by region
+  run_gam_yield_vs_year_by_region()  %>% 
+  # Make predictions of yields in 2050
+  predict_yields(2050)
