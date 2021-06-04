@@ -1,0 +1,27 @@
+library(openintro)
+library(dplyr)
+library(ggplot2)
+
+mod <- lm(formula = SLG ~ OBP, data = filter(mlbBat10, AB >= 10))
+
+
+# Create nontrivial_players
+
+nontrivial_players<- mlbBat10 %>% filter( AB>=10&OBP<0.5)
+
+
+
+# Fit model to new data
+
+mod_cleaner<- lm( SLG~OBP, data=nontrivial_players)
+
+
+# View model summary
+
+summary(mod_cleaner)
+
+
+# Visualize new model
+
+ggplot( nontrivial_players, aes(x=OBP, y=SLG)) + geom_point() +
+  geom_smooth(method="lm")
